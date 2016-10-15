@@ -1,0 +1,43 @@
+#: kivy 1.9.1
+#: import SingleLineTextField kivymd.textfields.SingleLineTextField
+#: import MDCard kivymd.card.MDCard
+#: import MDLabel kivymd.label.MDLabel
+#: import MDFlatButton kivymd.button.MDFlatButton
+
+[InputText@ModalView]:
+    size_hint: .8, .4
+    background_color: 0, 0, 0, .2
+    MDCard:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(15)
+            MDLabel:
+                font_style: 'Title'
+                theme_text_color: 'Primary'
+                text: ctx.title
+                halign: 'left'
+            SingleLineTextField:
+                id: text_field
+                size_hint: 1, None
+                height: dp(48)
+                hint_text: ctx.hint_text
+            Widget:
+            Widget:
+		    AnchorLayout:
+			    anchor_x: 'right'
+			    anchor_y: 'center'
+			    size_hint: 1, None
+			    height: dp(48)
+			    padding: dp(8), dp(8)
+			    spacing: dp(4)
+			    GridLayout:
+				    rows: 1
+				    size_hint: None, None
+				    height: dp(36)
+				    width: self.minimum_width
+                    MDFlatButton:
+                        text: ctx.text_button_ok
+                        on_release: ctx.events_callback(text_field.text)
+                    MDFlatButton:
+                        text: ctx.text_button_cancel
+                        on_release: ctx.events_callback(None)

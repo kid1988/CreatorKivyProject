@@ -1,0 +1,71 @@
+﻿# -*- coding: utf-8 -*-
+#
+# Файл русской языковой локализации
+#
+
+string_lang_title = '{NAME_PROJECT}'
+string_lang_exit_key = 'Выход'
+string_lang_wait = 'Подождите...'
+string_lang_exit = 'Покинуть программу?'
+string_lang_enter_value = 'Введите значение'
+string_lang_menu = 'Меню'
+string_lang_not_locale = 'Нет файла локализации {{}}.txt'
+
+#------------------------------------------------------------------------------
+
+string_lang_yes = 'Да'
+string_lang_no = 'Нет'
+string_lang_cancel = 'Отмена'
+
+#------------------------------------------------------------------------------
+
+string_lang_license = 'Лицензия'
+string_lang_not_license = 'Не найден текст лицензии!'
+string_lang_prev_license = 'Ознакомиться с текстом лицензии:'
+string_lang_on_russian = 'На русском'
+string_lang_on_english = 'На английском'
+
+#------------------------------------------------------------------------------
+
+string_lang_plugin = 'Плагины'
+string_lang_plugin_enable = 'Подключить'
+string_lang_plugin_switch_off = 'Отключить'
+string_lang_not_install_plugin = 'Нет установленных плагинов!'
+string_lang_not_info_plugin = 'Нет информации о плагине!'
+string_lang_plugin_activate = \
+'''[color={{TEXT_COLOR}}]Плагин [color={{KEY_TEXT_COLOR}}]\'{{NAME_PLUGIN}}\'
+[color={{TEXT_COLOR}}]подключен!
+[color={{TEXT_COLOR}}]И будет импортирован в клиент после следующего запуска.'''
+
+string_lang_plugin_warning = \
+'''[color={{TEXT_COLOR}}]Плагин [color={{LINK_COLOR}}]\'{{NAME_PLUGIN}}\'
+[color={{TEXT_COLOR}}]требует [color={{LINK_COLOR}}]Test [color={{TEXT_COLOR}}]по крайней мере, версии [color={{LINK_COLOR}}]{{VERSION_MIN}}.
+[color={{TEXT_COLOR}}]Ваша текущая версия - [color={{LINK_COLOR}}]{{VERSION_APP}}.
+[color={{TEXT_COLOR}}]Подключить?'''
+
+string_lang_plugin_warning_support = \
+'''[color={{TEXT_COLOR}}]Плагин [color={{LINK_COLOR}}]\'{{NAME_PLUGIN}}\'[color={{TEXT_COLOR}}]
+поддерживает [color={{LINK_COLOR}}]Test [color={{TEXT_COLOR}}]до версии [color={{LINK_COLOR}}]{{VERSION_MIN}}.
+[color={{TEXT_COLOR}}]Ваша текущая версия - [color={{LINK_COLOR}}]{{VERSION_APP}}.
+[color={{TEXT_COLOR}}]Подключить?'''
+
+#------------------------------------------------------------------------------
+
+string_lang_settings = 'Настройки'
+string_lang_setting_language = 'Настройки локализации:'
+string_lang_setting_language_title = 'Язык приложения'
+string_lang_setting_language_desc = 'Выберите предпочтительный язык приложения;'
+string_lang_setting_language_russian = 'Русский'
+string_lang_setting_language_english = 'English'
+
+
+#------------------------------------------------------------------------------
+
+string_lang_about = '''Версия - 0.0.1
+Лицензия - MIT
+[ref={REPOSITORY}][color={{LINK_COLOR}}]Исходный код[/color][/ref]
+[ref={MAIL}][color={{LINK_COLOR}}]Обратная вязь[/color][/ref]
+
+'''
+
+#------------------------------------------------------------------------------

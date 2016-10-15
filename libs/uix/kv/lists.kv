@@ -1,0 +1,45 @@
+#:kivy 1.9.1
+#:import MDList kivymd.list.MDList
+
+<CheckItem>:
+    on_press: root.events_callback(root.id, self.state, 'item')
+    LeftIcon:
+        source: root.icon
+    CheckWidget:
+        id: root.id
+        active: root.active
+        on_press: root.events_callback(root.id, self.state, 'check')
+
+<IconItemThree>:
+    id: avatar
+    on_press: root.events_callback(root.id, 'item')
+    LeftIcon:
+        source: root.icon
+
+<IconItem>:
+    id: avatar
+    on_press: root.events_callback(root.id, 'item')
+    LeftIcon:
+        source: root.icon
+
+<SingleIconItem>:
+    on_press: root.events_callback(self.text)
+    LeftMDIcon:
+        icon: root.icon
+        disabled: True
+
+<Item>:
+    on_press: root.events_callback(self.text)
+
+<Lists>:
+    padding: 5
+    ScrollView:
+        do_scroll_x: False
+        MDList:
+            id: list_items
+            canvas:
+                Color:
+                    rgba: 0, 0, 0, 0
+                Rectangle:
+                    pos: self.pos
+                    size: self.size

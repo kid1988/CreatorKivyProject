@@ -1,0 +1,7 @@
+Mercury/
+Mercury.modules
+*.log
+*.pyc
+*.pyo
+.idea
+/venv/

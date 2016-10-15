@@ -1,0 +1,66 @@
+#:kivy 1.9.1
+#:import Toolbar kivymd.toolbar.Toolbar
+
+<StartScreen>
+    orientation: 'vertical'
+    canvas:
+        Color:
+            rgba: app.data.color_body_program
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ###########################################################################
+    #
+    #                               ACTION BAR
+    #
+    ###########################################################################
+	Toolbar:
+		id: action_bar
+		background_color: app.data.color_action_bar
+		title: app.title
+		left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
+		right_action_items: [['more-vert', lambda x: None]]
+    ###########################################################################
+    #
+    #                           BODY PROGRAM
+    #
+    ###########################################################################
+    ScreenManager:
+        id: screen_manager
+        Screen:
+            BoxLayout:
+                id: box_content
+                orientation: 'vertical'
+                RstDocument:
+                    id: body_program
+                    text:
+                        open('{}/license/license_{}.rst'.format(\
+                        app.directory, app.data.language)).read()
+                    background_color: 1.0, 1.0, 1.0, 0
+                    underline_color: app.data.underline_rst_color
+###############################################################################
+#
+#                             NAVIGATION DRAWER
+#
+###############################################################################
+<NavDrawer>:
+	NavigationDrawerIconButton:
+		icon: 'settings'
+		text: app.data.string_lang_settings
+		on_release: app.events_program(self.text)
+	NavigationDrawerIconButton:
+		icon: 'view-module'
+		text: app.data.string_lang_plugin
+		on_release: app.events_program(self.text)
+	NavigationDrawerIconButton:
+		icon: 'info'
+		text: app.data.string_lang_license
+		on_release: app.events_program(self.text)
+	NavigationDrawerIconButton:
+		icon: 'collection-text'
+		text: 'About'
+		on_release: app.events_program(self.text)
+	NavigationDrawerIconButton:
+		icon: 'close-circle'
+		text: app.data.string_lang_exit_key
+		on_release: app.events_program(app.data.string_lang_exit_key)

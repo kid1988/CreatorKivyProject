@@ -1,0 +1,11 @@
+[
+  {{ "type": "title",
+     "title": "{language}" }},
+
+  {{ "type": "options",
+     "title": "{title}",
+     "desc": "{desc}",
+     "section": "General",
+     "key": "language",
+     "options": ["{russian}", "{english}"] }}
+]

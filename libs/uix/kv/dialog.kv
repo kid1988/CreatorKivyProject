@@ -1,0 +1,143 @@
+#:kivy 1.9.1
+#:import MDFlatButton kivymd.button.MDFlatButton
+#:import MDSpinner kivymd.spinner.MDSpinner
+
+[FileListEntry@FloatLayout+TreeViewNode]:
+    locked: False
+    entries: []
+    path: ctx.path
+    # FIXME: is_selected is actually a read_only treeview property. In this
+    # case, however, we're doing this because treeview only has single-selection
+    # hardcoded in it. The fix to this would be to update treeview to allow
+    # multiple selection.
+    is_selected: self.path in ctx.controller().selection
+
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: '48dp' if dp(1) > 1 else '24dp'
+    # Don't allow expansion of the ../ node
+    is_leaf: not ctx.isdir or ctx.name.endswith('..' + ctx.sep) or self.locked
+    on_touch_down: self.collide_point(*args[1].pos) and ctx.controller().entry_touched(self, args[1])
+    on_touch_up: self.collide_point(*args[1].pos) and ctx.controller().entry_released(self, args[1])
+    BoxLayout:
+        pos: root.pos
+        Label:
+            id: filename
+            size_hint_x: None
+            width: (self.texture_size[0] + dp(4)) if self.texture_size else dp(10)
+            halign: 'left'
+            shorten: True
+            text: ctx.name
+            color: 0, 0, 0, 1
+        Label:
+            text_size: self.width, None
+            size_hint_x: None
+            halign: 'right'
+            text: '{}'.format(ctx.get_nice_size())
+            color: 0, 0, 0, 1
+
+<-FileChooserListLayout>:
+    on_entry_added: treeview.add_node(args[1])
+    on_entries_cleared: treeview.root.nodes = []
+    on_subentry_to_entry: not args[2].locked and treeview.add_node(args[1], args[2])
+    on_remove_subentry: args[2].nodes = []
+
+    BoxLayout:
+        pos: root.pos
+        size: root.size
+        size_hint: None, None
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: '30dp'
+            orientation: 'horizontal'
+            Widget:
+                # Just for spacing
+                width: '10dp'
+                size_hint_x: None
+            Label:
+                text: 'Name'
+                text_size: self.size
+                halign: 'left'
+                bold: True
+                color: 0, 0, 0, 1
+            Label:
+                text: 'Size'
+                text_size: self.size
+                size_hint_x: None
+                halign: 'right'
+                bold: True
+                color: 0, 0, 0, 1
+            Widget:
+                # Just for spacing
+                width: '10dp'
+                size_hint_x: None
+        ScrollView:
+            id: scrollview
+            do_scroll_x: False
+            Scatter:
+                do_rotation: False
+                do_scale: False
+                do_translation: False
+                size: treeview.size
+                size_hint_y: None
+                TreeView:
+                    id: treeview
+                    hide_root: True
+                    size_hint_y: None
+                    width: scrollview.width
+                    height: self.minimum_height
+                    on_node_expand: root.controller.entry_subselect(args[1])
+                    on_node_collapse: root.controller.close_subselection(args[1])
+        AnchorLayout:
+            anchor_x: 'right'
+            anchor_y: 'center'
+            size_hint: 1, None
+            height: dp(40)
+            padding: dp(8), dp(8)
+            spacing: dp(4)
+            GridLayout:
+                rows: 1
+                size_hint: None, None
+                height: dp(36)
+                width: self.minimum_width
+                MDFlatButton:
+                    id: button_ok
+                    text: 'OK'
+
+<-FileChooserProgress>:
+    pos_hint: {'x': 0, 'y': 0}
+    canvas:
+        Color:
+            rgba: 1, 1, 1, .8
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        pos_hint: {'x': .2, 'y': .6}
+        size_hint: .6, .2
+        text: 'Opening %s' % root.path
+        color: 0, 0, 0, 1
+    FloatLayout:
+        pos_hint: {'x': .2, 'y': .4}
+        size_hint: .6, .2
+        MDSpinner:
+            id: pb
+            size_hint: None, None
+            size: dp(46), dp(46)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            active: True
+        Label:
+            pos_hint: {'x': 0}
+            text: '%d / %d' % (root.index, root.total)
+            size_hint_y: None
+            height: self.texture_size[1]
+            y: pb.center_y - self.height - 44
+            font_size: '13sp'
+            color: 0, 0, 0, 1
+    AnchorLayout:
+        pos_hint: {'x': .2, 'y': .1}
+        size_hint: .6, .2
+        MDFlatButton:
+            text: 'Cancel'
+            on_release: root.cancel()

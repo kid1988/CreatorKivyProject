@@ -1,0 +1,8 @@
+Plugin-Desc: Добавляет кнопку в ActionBar
+App-Version-Max: 0.0.1
+Plugin-Name: New Button
+Plugin-Version: 0.0.1
+Plugin-Mail: gorodage@gmail.com
+Plugin-Package: button
+Plugin-Author: Ivanov Yuri
+App-Version-Min: 0.0.1
