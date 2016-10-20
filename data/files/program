@@ -160,6 +160,6 @@ class Program(App, _class.ShowPlugin, _class.ShowAbout, _class.ShowLicense):
 
     def on_pause(self):
         '''Ставит приложение на 'паузу' при выхоже из него.
-        В противном случае запускает программу по заново'''
+        В противном случае запускает программу заново'''
 
         return True

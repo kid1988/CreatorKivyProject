@@ -1,6 +1,8 @@
 #:kivy 1.9.1
 #:import MDFlatButton kivymd.button.MDFlatButton
-#:import MDSpinner kivymd.spinner.MDSpinner
+#:import MDProgressBar kivymd.progressbar.MDProgressBar
+
+##:import MDSpinner kivymd.spinner.MDSpinner
 
 [FileListEntry@FloatLayout+TreeViewNode]:
     locked: False
@@ -113,20 +115,25 @@
         Rectangle:
             pos: self.pos
             size: self.size
-    Label:
-        pos_hint: {'x': .2, 'y': .6}
-        size_hint: .6, .2
-        text: 'Opening %s' % root.path
-        color: 0, 0, 0, 1
+    #Label:
+    #    pos_hint: {'x': .2, 'y': .6}
+    #    size_hint: .6, .2
+    #    text: 'Opening %s' % root.path
+    #    color: 0, 0, 0, 1
     FloatLayout:
         pos_hint: {'x': .2, 'y': .4}
         size_hint: .6, .2
-        MDSpinner:
+        #MDSpinner:
+        #    id: pb
+        #    size_hint: None, None
+        #    size: dp(46), dp(46)
+        #    pos_hint: {'center_x': .5, 'center_y': .5}
+        #    active: True
+        MDProgressBar:
             id: pb
-            size_hint: None, None
-            size: dp(46), dp(46)
-            pos_hint: {'center_x': .5, 'center_y': .5}
-            active: True
+            pos_hint: {'x': 0, 'center_y': .5}
+            max: root.total
+            value: root.index
         Label:
             pos_hint: {'x': 0}
             text: '%d / %d' % (root.index, root.total)
