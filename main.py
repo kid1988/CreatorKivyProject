@@ -1,3 +1,7 @@
+                                                                     
+                                                                     
+                                                                     
+                                             
 #! /usr/bin/python3.4
 # -*- coding: utf-8 -*-
 #
@@ -11,6 +15,7 @@ import os
 import sys
 import shutil
 import argparse
+import traceback
 
 try:
     from kivy.logger import Logger
@@ -18,7 +23,7 @@ except Exception:
     import traceback
     raise(traceback.format_exc())
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 if len(sys.argv) <= 1:
     Logger.warning('''
@@ -74,12 +79,12 @@ except PermissionError:
     )
 try:
     Logger.info('Создание точки входа main.py ...')
-    open('{}/main.py'.format(full_path_to_project), 'w').write(
-        open('{}/data/files/main'.format(prog_path)).read() % repo_project)
+    open('{}/main.py'.format(full_path_to_project), 'w', encoding='utf-8').write(
+        open('{}/data/files/main'.format(prog_path), encoding='utf-8').read() % repo_project)
 
     Logger.info('Создание файла языковой локализации russian.txt ...')
-    open('{}/russian.txt'.format(dir_language), 'w').write(
-        open('{}/data/files/russian'.format(prog_path)).read().format(
+    open('{}/russian.txt'.format(dir_language), 'w', encoding='utf-8').write(
+        open('{}/data/files/russian'.format(prog_path), encoding='utf-8').read().format(
             NAME_PROJECT=name_project,
             REPOSITORY=repo_project,
             MAIL=address_mail
@@ -87,7 +92,7 @@ try:
     )
 
     Logger.info('Создание файла README.md ...')
-    open('{}/README.md'.format(full_path_to_project), 'w').write('')
+    open('{}/README.md'.format(full_path_to_project), 'w', encoding='utf-8').write('')
 
     data = {
         '{}/program.py'.format(full_path_to_project):
@@ -97,8 +102,8 @@ try:
     }
     for file in data.keys():
         Logger.info(data[file])
-        open(file, 'w').write(open('{}/data/files/{}'.format(
-            prog_path, os.path.splitext(os.path.split(file)[1])[0])).read())
+        open(file, 'w', encoding='utf-8').write(open('{}/data/files/{}'.format(
+            prog_path, os.path.splitext(os.path.split(file)[1])[0]), encoding='utf-8').read())
 
     Logger.info('Копирование файлов проекта ...')
     for directory in ['{}/libs', '{}/data/images', '{}/data/themes']:
@@ -109,18 +114,17 @@ try:
     os.mkdir(dir_license)
     for file_license in ['license_english.rst', 'license_russian.rst']:
         open('{}/license/{}'.format(
-            full_path_to_project, file_license),'w').write(
+            full_path_to_project, file_license),'w', encoding='utf-8').write(
             open('{}/data/files/{}'.format(
-                prog_path, file_license)).read().format(COPYRIGHT=name_autor))
+                prog_path, file_license), encoding='utf-8').read().format(COPYRIGHT=name_autor))
     shutil.copy(
         '{}/data/files/open-source-logo.png'.format(prog_path),
         '{}/open-source-logo.png'.format(dir_license)
     )
-
     Logger.info('Создание файла README.rst для плагина button ...')
     open('{}/libs/plugins/button/README.rst'.format(full_path_to_project),
-         'w').write(
-        open('{}/data/files/README.rst'.format(prog_path)).read()
+         'w', encoding='utf-8').write(
+        open('{}/data/files/README.rst'.format(prog_path), encoding='utf-8').read()
     )
 except FileNotFoundError as exc:
     Logger.error('Не могу найти файл проекта - {}'.format(exc))
