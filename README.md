@@ -11,6 +11,7 @@ Python 3
 ЗАВИСИМОСТИ
 -----------
 Фреймворк [Kivy](http://kivy.org)
+
 Библиотека [KivyMD](https://gitlab.com/kivymd/KivyMD)
 
 УСТАНОВКА
@@ -48,7 +49,7 @@ python3 main.py name_project path_to_project
 
 ВЕРСИЯ
 ------
-Version 0.1.1
+Version 0.1.2
 
 КОНТАКТЫ
 --------
